@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Beacons</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="retry">Retry</string>
+    <string name="check_internet">Please check network conntection</string>
+    <string name="empty">Empty</string>
+    <string name="action_enable_bluetooth">Bluetoth enable</string>
+    <string name="disable_bluetooth">Disable bluetoth</string>
+    <string name="action_disable_bluetooth">Disable bluetooth</string>
+    <string name="whait_bluetooth_turning_off">Bluetooth turning off...</string>
+    <string name="whait_bluetooth_turning_on">Bluetooth turning on...</string>
+    <string name="bluetooth_on">Bluetooth ON</string>
+    <string name="bluetooth_off">Bluetooth OFF</string>
+
 </resources>
