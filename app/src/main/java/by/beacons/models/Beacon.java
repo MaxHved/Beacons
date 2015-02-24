@@ -12,8 +12,18 @@ public class Beacon extends ParseObject{
     public static final String MINOR = "Minor";
     public static final String BRAND = "Brand";
     private Double mDistance;
+    private boolean mIsEnterRegion;
 
     public Beacon() {
+    }
+
+    public Beacon(Beacon beacon) {
+        super();
+        put(UUID, beacon.getUUID());
+        put(MAJOR, beacon.getMajor());
+        put(MINOR, beacon.getMinor());
+        put(BRAND, beacon.getBrand());
+        mDistance = beacon.getDistance();
     }
 
     public String getUUID() {
@@ -46,5 +56,13 @@ public class Beacon extends ParseObject{
 
     public void setDistance(Double distance) {
         mDistance = distance;
+    }
+
+    public boolean isEnterRegion() {
+        return mIsEnterRegion;
+    }
+
+    public void setEnterRegion(boolean isEnterRegion) {
+        mIsEnterRegion = isEnterRegion;
     }
 }

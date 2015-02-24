@@ -12,11 +12,14 @@ import com.parse.ParseQueryAdapter;
 
 import by.beacons.R;
 import by.beacons.app.App;
+import by.beacons.models.Beacon;
 import by.beacons.models.Tool;
 
 public class ToolsAdapter extends ParseQueryAdapter<Tool>{
 
     private LayoutInflater mInflater;
+
+    private boolean mIsShowExtandInfo;
 
     public ToolsAdapter(Context context) {
         super(context, new QueryFactory<Tool>() {
@@ -34,6 +37,14 @@ public class ToolsAdapter extends ParseQueryAdapter<Tool>{
     }
 
 
+    public boolean isShowExtandInfo() {
+        return mIsShowExtandInfo;
+    }
+
+    public void setShowExtandInfo(boolean isShowExtandInfo) {
+        mIsShowExtandInfo = isShowExtandInfo;
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getItemView(Tool object, View v, ViewGroup parent) {
@@ -48,19 +59,28 @@ public class ToolsAdapter extends ParseQueryAdapter<Tool>{
     private ViewHolder createHolder(View v) {
         ViewHolder holder = new ViewHolder();
         holder.nameTool = (TextView) v.findViewById(R.id.name_tool);
-        holder.distanse = (TextView) v.findViewById(R.id.distanse);
+        holder.distance = (TextView) v.findViewById(R.id.distanse);
+        holder.isEnterRegion = (TextView) v.findViewById(R.id.is_enter);
         return holder;
     }
 
     private void bindInfo(ViewHolder holder, Tool item) {
         holder.nameTool.setText(item.getName());
-        String distance = item.getBeacon().getDistance() == null ? "" : String.valueOf(item.getBeacon().getDistance());
-        holder.distanse.setText(distance);
+        if(mIsShowExtandInfo) {
+            Beacon beacon = item.getBeacon();
+            String distance = beacon.getDistance() != null && beacon.isEnterRegion() ? String.format("%.3f Meters", item.getBeacon().getDistance()) : "";
+            holder.distance.setText(distance);
+            holder.isEnterRegion.setText(item.getBeacon().isEnterRegion() ? "Enter" : "Leave"); //TODO
+        } else {
+            holder.distance.setText("");
+            holder.isEnterRegion.setText("");
+        }
     }
 
     private class ViewHolder {
         private TextView nameTool;
-        private TextView distanse;
+        private TextView distance;
+        private TextView isEnterRegion;
 
     }
 
